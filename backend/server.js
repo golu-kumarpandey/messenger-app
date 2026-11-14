@@ -25,9 +25,9 @@ app.use(globalError);
 
 const connectDB = require("../backend/utils/database");
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(port, () => {
+app.listen(PORT, "0.0.0.0", () => {
   connectDB();
-  console.log(`server is listening on ${port}`);
+  console.log(`server is listening on ${PORT}`);
 });
