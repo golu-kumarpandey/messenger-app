@@ -22,7 +22,7 @@ services:
     buildCommand: npm install
     startCommand: npm start
 
-  - type: static_site
+  - type: static
     name: messenger-web
     rootDir: frontend
     buildCommand: npm install && npm run build
