@@ -1,9 +1,13 @@
-const io = require("socket.io")(8000, {
+const port = process.env.PORT || 8000;
+
+const io = require("socket.io")(port, {
   cors: {
     origin: "*",
     method: ["GET", "POST", "PUT", "DELETE"],
   },
 });
+
+console.log(`socket server is listening on ${port}`);
 
 let users = [];
 const addUser = (userId, socketId, userInfo) => {

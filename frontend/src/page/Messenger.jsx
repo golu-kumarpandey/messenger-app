@@ -126,7 +126,14 @@ const Messenger = () => {
 
   useEffect(() => {
     if (!socket.current) {
-      socket.current = io("http://localhost:8000");
+      const socketUrl = import.meta.env.VITE_SOCKET_URL;
+      socket.current = io(
+        socketUrl
+          ? socketUrl.startsWith("http")
+            ? socketUrl
+            : `https://${socketUrl}`
+          : "http://localhost:8000",
+      );
 
       socket.current.on("connect", () => {
         // user data sends to sockets

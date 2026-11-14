@@ -1,10 +1,18 @@
 import { createRoot } from "react-dom/client";
+import axios from "axios";
 import "./index.css";
 import App from "./App.jsx";
 import store from "../store.js";
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { isDark } from "./utils/helper.js";
+
+const apiUrl = import.meta.env.VITE_API_URL;
+if (apiUrl) {
+  axios.defaults.baseURL = apiUrl.startsWith("http")
+    ? apiUrl
+    : `https://${apiUrl}`;
+}
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>

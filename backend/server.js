@@ -15,6 +15,10 @@ app.use(cors());
 app.use(express.json());
 app.use(cookiesParser());
 
+app.get("/health", (_req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.use("/api", userRouter);
 app.use("/api", chatRouter);
 app.use(globalError);
@@ -25,5 +29,5 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   connectDB();
-  console.log("server is listining on 3000");
+  console.log(`server is listening on ${port}`);
 });

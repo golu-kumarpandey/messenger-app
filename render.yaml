@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: messenger-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRE
+        sync: false
+
+  - type: web
+    name: messenger-socket
+    runtime: node
+    rootDir: sockets
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+
+  - type: static_site
+    name: messenger-web
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: messenger-api
+          property: host
+      - key: VITE_SOCKET_URL
+        fromService:
+          type: web
+          name: messenger-socket
+          property: host
