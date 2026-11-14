@@ -29,12 +29,6 @@ services:
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: messenger-api
-          property: host
+        value: https://messenger-api-tgey.onrender.com
       - key: VITE_SOCKET_URL
-        fromService:
-          type: web
-          name: messenger-socket
-          property: host
+        value: https://messenger-socket.onrender.com
